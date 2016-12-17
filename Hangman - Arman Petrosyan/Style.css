@@ -1,0 +1,17 @@
+body {
+    background-image:url(http://www.settlementperspectives.com/wp-content/uploads/Hangmans-Noose1.jpg);
+    background-color:brown;
+}
+h1{
+        font-family:"Lexicon";font-size:40;text-align:center;color:brown;border-style:solid;border-color:#d0e1f9;
+    }
+h3{
+    font-family:"Lexicon";font-size:30;text-align:center;color:white;
+}
+    
+button{
+    background-color:brown;font-size:18px;
+}
+p{
+    text-align:center;font-family:"Serif";font-size:32;color:white;
+}

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hangman - Arman Petrosyane</title>
+		<link rel="stylesheet" type="text/css" href="Style.css">
+	</head>
+	<body>
+	   
+	    
+		<h1>HANGMAN</h1>
+		<h3>Category: Animals</h3>
+	    
+		<button id="A" type="button" onclick="aletter()">A</button>
+		<button id="B" type="button" onclick="bletter()">B</button>
+		<button id="C" type="button" onclick="cletter()">C</button>
+		<button id="D" type="button" onclick="dletter()">D</button>
+		<button id="E" type="button" onclick="eletter()">E</button>
+		<button id="F" type="button" onclick="fletter()">F</button>
+		<button id="G" type="button" onclick="gletter()">G</button>
+		<button id="H" type="button" onclick="hletter()">H</button>
+		<button id="I" type="button" onclick="iletter()">I</button>
+		<button id="J" type="button" onclick="jletter()">J</button>
+		<button id="K" type="button" onclick="kletter()">K</button>
+		<button id="L" type="button" onclick="lletter()">L</button>
+		<button id="M" type="button" onclick="mletter()">M</button>
+		<button id="N" type="button" onclick="nletter()">N</button>
+		<button id="O" type="button" onclick="oletter()">O</button>
+		<button id="P" type="button" onclick="pletter()">P</button>
+		<button id="Q" type="button" onclick="qletter()">Q</button>
+		<button id="R" type="button" onclick="rletter()">R</button>
+		<button id="S" type="button" onclick="sletter()">S</button>
+		<button id="T" type="button" onclick="tletter()">T</button>
+		<button id="U" type="button" onclick="uletter()">U</button>
+		<button id="V" type="button" onclick="vletter()">V</button>
+		<button id="W" type="button" onclick="wletter()">W</button>
+		<button id="X" type="button" onclick="xletter()">X</button>
+		<button id="Y" type="button" onclick="yletter()">Y</button>
+		<button id="Z" type="button" onclick="zletter()">Z</button>
+		
+    
+        <p id="bar">Guess The Animal Name! <br/> You Have 7 Lives Left </p>
+        <p id="winorlose"></p>
+        
+	</body>
+</html>
+
+<script>
+var my_array = ["ALLIGATOR", "DOG", "RAT", "DOLPHIN", "HORSE", "SCORPION", "BEAR", "DUCK", "KANGAROO", "SEAL", "BEE", "EAGLE", "KITTEN", "SHARK", "BIRD", "ELEPHANT", "LION", "SHEEP", "CAMEL", "FISH", "LOBSTER", "SNAIL", "CAT", "FLY", "MONKEY", "SNAKE", "FOX", "SPIDER", "CHICKEN", "FROG", "OWL", "SQUIRREL", "CHIMPANZEE", "GIRAFFE", "PANDA", "TIGER", "COW", "GOAT", "PIG", "TIRTLE", "CROCODILE", "GOLDFISH", "PUPPY", "WOLF", "DEER", "HAMSTER", "RABBIT", "ZEBRA"];       
+
+var randomIndex = Math.floor(Math.random() * my_array.length);      //get random element from dictionary
+   
+var RE = Array.from(my_array[randomIndex]);                         //make the random element a string
+                                    
+var Empty = [];                             
+Empty.length = RE.length;
+
+for(k=0;k<Empty.length;k++){
+    Empty[k] = "__";
+}
+
+function disableall(){
+   
+    document.getElementById("A").disabled = true;
+    document.getElementById("B").disabled = true;
+    document.getElementById("C").disabled = true;
+    document.getElementById("D").disabled = true;
+    document.getElementById("E").disabled = true;
+    document.getElementById("F").disabled = true;
+    document.getElementById("G").disabled = true;
+    document.getElementById("H").disabled = true;
+    document.getElementById("I").disabled = true;
+    document.getElementById("J").disabled = true;
+    document.getElementById("K").disabled = true;
+    document.getElementById("L").disabled = true;
+    document.getElementById("M").disabled = true;
+    document.getElementById("N").disabled = true;
+    document.getElementById("O").disabled = true;
+    document.getElementById("P").disabled = true;
+    document.getElementById("Q").disabled = true;
+    document.getElementById("R").disabled = true;
+    document.getElementById("S").disabled = true;
+    document.getElementById("T").disabled = true;
+    document.getElementById("U").disabled = true;
+    document.getElementById("V").disabled = true;
+    document.getElementById("W").disabled = true;
+    document.getElementById("X").disabled = true;
+    document.getElementById("Y").disabled = true;
+    document.getElementById("Z").disabled = true;
+}
+var correctletter = 0;                          //does letter exist in the word
+var attempt = 0;                                //number of attempts
+var n;
+var blank;
+var j;
+
+function check(){
+    n = 0;
+    for(i=0;i<RE.length;i++){                                           //filling the empty string
+        if(RE[i] === j){
+            n = n+1;
+          
+            Empty[i] = j;
+        }
+            
+    }
+            if(n>=1){
+                correctletter = correctletter + 1;   
+            }
+        
+        attempt = attempt + 1;
+        
+        if(attempt - correctletter >= 7){
+            document.getElementById("winorlose").innerHTML = "GAME OVER! " +"<br/>" + "The word was " + my_array[randomIndex];
+            disableall();
+        }
+        blank = 0;
+        for(j=0;j<Empty.length;j++){
+            if(Empty[j] === "__"){
+                blank = blank + 1;
+            }
+        }
+        if(blank === 0){
+            document.getElementById("winorlose").innerHTML = "YOU WIN!";
+            disableall();
+        }
+   
+}
+
+function aletter(){
+    j = "A";
+    check();
+    document.getElementById("A").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function bletter(){
+    j = "B";
+    check();
+    
+    document.getElementById("B").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function cletter(){
+    
+    j = "C";
+    check();
+    
+    document.getElementById("C").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function dletter(){
+    
+    j = "D";
+    check();
+    
+    document.getElementById("D").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function eletter(){
+    
+    j = "E";
+    check();
+    
+    document.getElementById("E").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function fletter(){
+    
+    j = "F";
+    check();
+    
+    document.getElementById("F").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function gletter(){
+    
+    j = "G";
+    check();
+    
+    document.getElementById("G").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function hletter(){
+    
+    j = "H";
+    check();
+    
+    document.getElementById("H").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function iletter(){
+    
+    j = "I";
+    check();
+    
+    document.getElementById("I").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function jletter(){
+    
+    j = "J";
+    check();
+    
+    document.getElementById("J").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function kletter(){
+    
+    j = "K";
+    check();
+    
+    document.getElementById("K").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function lletter(){
+    
+    j = "L";
+    check();
+    
+    document.getElementById("L").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function mletter(){
+    
+    j = "M";
+    check();
+    
+    document.getElementById("M").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function nletter(){
+    
+    j = "N";
+    check();
+    
+    document.getElementById("N").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function oletter(){
+    
+    j = "O";
+    check();
+    
+    document.getElementById("O").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function pletter(){
+    
+    j = "P";
+    check();
+    
+    document.getElementById("P").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function qletter(){
+    
+    j = "Q";
+    check();
+    
+    document.getElementById("Q").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function rletter(){
+    
+    j = "R";
+    check();
+    
+    document.getElementById("R").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function sletter(){
+    
+    j = "S";
+    check();
+    
+    document.getElementById("S").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function tletter(){
+    
+    j = "T";
+    check();
+    
+    document.getElementById("T").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function uletter(){
+    
+    j = "U";
+    check();
+    
+    document.getElementById("U").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function vletter(){
+    
+    j = "V";
+    check();
+    
+    document.getElementById("V").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function wletter(){
+    
+    j = "W";
+    check();
+    
+    document.getElementById("W").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function xletter(){
+    
+    j = "X";
+    check();
+    
+    document.getElementById("X").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function yletter(){
+    
+    j = "Y";
+    check();
+    
+    document.getElementById("Y").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+
+function zletter(){
+    
+    j = "Z";
+    check();
+    
+    document.getElementById("Z").disabled = true;
+    document.getElementById("bar").innerHTML = Empty+"<br/>"+ //+correctletter+attempt+n+blank+
+    "You Have "+ (7 - attempt + correctletter) + " Lives Left";
+}
+</script>
